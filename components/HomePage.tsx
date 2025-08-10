@@ -98,7 +98,7 @@ const COPY = {
       icon: Zap
     }
   ],
-  sports: ['Running', 'Tennis', 'Strength Pods', 'Cycling'],
+  sports: ['Running', 'Tennis', 'Strength Pods', 'Cycling', 'Hyrox', 'CrossFit'],
   cities: ['London', 'New York City'],
   faqs: [
     {
@@ -589,7 +589,10 @@ const HomePage: React.FC = () => {
                 >
                   {COPY.ctas.primary}
                 </CTA>
-                <CTA variant="ghost">
+                <CTA 
+                  variant="ghost"
+                  onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   {COPY.ctas.secondary}
                 </CTA>
               </div>
@@ -735,7 +738,7 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
               {/* Sports */}
               <div>
-                <h3 className="text-2xl font-bold mb-8 tracking-tight">Sports (V1)</h3>
+                <h3 className="text-2xl font-bold mb-8 tracking-tight">Sports</h3>
                 <div className="flex flex-wrap gap-4">
                   {COPY.sports.map((sport) => (
                     <Pill key={sport} active={true}>
