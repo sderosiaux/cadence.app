@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s | Cadence'
   },
   description: copyData.seo.description,
-  keywords: ['founders', 'operators', 'VCs', 'sports', 'networking', 'elite', 'private', 'vetted', 'london', 'new york', 'venture-backed', 'investors', 'training', 'quiet signals', 'member kit', '1:1', 'triads'],
+  keywords: ['self-serve', 'members club', 'founders', 'operators', 'VCs', 'sports', 'networking', 'elite', 'private', 'suggestion engine', 'quarterly gatherings', 'london', 'new york', 'venture-backed', 'investors', 'training', 'quiet signals', '1:1', 'triads'],
   authors: [{ name: 'Cadence Team' }],
   creator: 'Cadence',
   publisher: 'Cadence',

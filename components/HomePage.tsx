@@ -30,7 +30,12 @@ import {
   ChevronDown,
   ChevronUp,
   ArrowRight,
-  Check
+  Check,
+  UserCheck,
+  Target,
+  Sparkles,
+  Clock,
+  BookOpen
 } from 'lucide-react';
 
 // Brand constants
@@ -296,11 +301,15 @@ const HomePage: React.FC = () => {
   };
 
   const trackCTAClick = (location: string, city?: string) => {
-    trackEvent('cta_clicked', {
+    trackEvent('apply_click', {
       location,
       city,
       page: 'homepage'
     });
+  };
+
+  const trackHeroCTAClick = (city: string) => {
+    trackEvent('cta_hero_click', { city, page: 'homepage' });
   };
 
   // JSON-LD structured data for SEO
@@ -484,7 +493,7 @@ Request an Invite
                 <CTA 
                   variant="solid"
                   onClick={() => {
-                    trackCTAClick('hero', 'London');
+                    trackHeroCTAClick('London');
                     const form = document.getElementById('invite-form');
                     const citySelect = document.querySelector('select[name="city"]') as HTMLSelectElement;
                     if (form && citySelect) {
@@ -498,7 +507,7 @@ Request an Invite
                 <CTA 
                   variant="solid"
                   onClick={() => {
-                    trackCTAClick('hero', 'New York');
+                    trackHeroCTAClick('New York');
                     const form = document.getElementById('invite-form');
                     const citySelect = document.querySelector('select[name="city"]') as HTMLSelectElement;
                     if (form && citySelect) {
@@ -527,6 +536,166 @@ Request an Invite
         </Container>
       </Section>
 
+      {/* The Problem & Promise - Above the fold */}
+      <Section className="py-24">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <motion.div 
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              transition={fadeInUpTransition}
+            >
+              <Headline level={2} className="mb-8">{COPY.problem.title}</Headline>
+              <Subcopy className="text-lg">
+                {COPY.problem.body}
+              </Subcopy>
+            </motion.div>
+            
+            <motion.div 
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              transition={{ ...fadeInUpTransition, delay: 0.2 }}
+            >
+              <Headline level={2} className="mb-8">{COPY.promise.title}</Headline>
+              <Subcopy className="text-lg">
+                {COPY.promise.body}
+              </Subcopy>
+            </motion.div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* What It Is Section */}
+      <Section className="py-24 bg-gray-50">
+        <Container>
+          <motion.div 
+            className="text-center max-w-4xl mx-auto"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
+          >
+            <Headline level={2} className="mb-8">{COPY.whatItIs.title}</Headline>
+            <Subcopy className="text-xl leading-relaxed mb-16">
+              {COPY.whatItIs.body}
+            </Subcopy>
+            
+            {/* Small App Interface Mockup */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="max-w-sm mx-auto mb-16"
+            >
+              <div className="bg-white rounded-3xl p-4 shadow-lg border border-gray-200">
+                {/* Mock phone header with tabs */}
+                <div className="flex items-center justify-between mb-4 px-2">
+                  <div className="flex space-x-4">
+                    <div className="text-sm font-semibold text-gray-900 border-b-2 border-gray-900 pb-1">Suggestions</div>
+                    <div className="text-sm text-gray-500">Connections</div>
+                  </div>
+                  <div className="w-6 h-6 bg-gray-200 rounded-full"></div>
+                </div>
+                
+                {/* Mock suggestion card */}
+                <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-xs text-green-700 font-medium">Tue 7:00 AM • Regent's Park</div>
+                    <div className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">New</div>
+                  </div>
+                  <div className="flex items-center space-x-2 mb-3">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">JS</span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-gray-900">James • Founder</div>
+                      <div className="text-xs text-gray-600">Similar pace • 12 min away</div>
+                    </div>
+                  </div>
+                  <div className="flex space-x-2">
+                    <button className="flex-1 bg-gray-900 text-white py-2 px-3 rounded-xl text-xs font-medium">
+                      Add to Calendar
+                    </button>
+                    <button className="px-3 py-2 border border-gray-300 rounded-xl text-xs text-gray-600">
+                      Pass
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Connections list header */}
+                <div className="border-t border-gray-100 pt-4 mb-3">
+                  <div className="text-xs font-semibold text-gray-700 mb-3">Your connections</div>
+                </div>
+                
+                {/* Connection items */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-7 h-7 bg-purple-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">AM</span>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">Anna • CTO</div>
+                        <div className="text-xs text-gray-500">Last met 2 weeks ago</div>
+                      </div>
+                    </div>
+                    <button className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+                      Nudge
+                    </button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-7 h-7 bg-orange-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">MK</span>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">Mike • Partner</div>
+                        <div className="text-xs text-gray-500">Last met 1 month ago</div>
+                      </div>
+                    </div>
+                    <button className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full font-medium">
+                      Suggest
+                    </button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-7 h-7 bg-teal-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">SL</span>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">Sarah • Founder</div>
+                        <div className="text-xs text-green-600 font-medium">Met yesterday</div>
+                      </div>
+                    </div>
+                    <div className="text-xs text-gray-400">✓</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* What it is not - integrated horizontally */}
+            <div className="mt-16">
+              <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                {COPY.whatItIsNot.items.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-200 rounded-full"
+                  >
+                    <X className="w-4 h-4 text-red-500" />
+                    <span className="text-sm font-medium text-red-700">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </Section>
+
+
       {/* Who We Serve Section */}
       <Section className="py-24">
         <Container>
@@ -549,6 +718,10 @@ Request an Invite
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="p-6 bg-gray-50 rounded-2xl"
                 >
+                  {/* Face placeholder */}
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-blue-500 rounded-full mb-4 mx-auto flex items-center justify-center">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
                   <p className="text-lg font-medium">{bullet}</p>
                 </motion.div>
               ))}
@@ -557,31 +730,39 @@ Request an Invite
         </Container>
       </Section>
 
-      {/* The Problem & Promise */}
-      <Section className="py-24 bg-gray-50">
+      {/* Trust and Rules */}
+      <Section id="trust" className="py-32 bg-gray-50">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <motion.div 
-              initial={fadeInUp.initial}
-              animate={fadeInUp.animate}
-              transition={fadeInUpTransition}
-            >
-              <Headline level={2} className="mb-8">{COPY.problem.title}</Headline>
-              <Subcopy className="text-lg">
-                {COPY.problem.body}
-              </Subcopy>
-            </motion.div>
-            
-            <motion.div 
-              initial={fadeInUp.initial}
-              animate={fadeInUp.animate}
-              transition={{ ...fadeInUpTransition, delay: 0.2 }}
-            >
-              <Headline level={2} className="mb-8">{COPY.promise.title}</Headline>
-              <Subcopy className="text-lg">
-                {COPY.promise.body}
-              </Subcopy>
-            </motion.div>
+          <motion.div 
+            className="text-center mb-20"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
+          >
+            <Headline level={2} className="mb-8">{COPY.trust.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
+              {COPY.trust.intro}
+            </Subcopy>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {COPY.trust.bullets.map((rule, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="p-8">
+                    <div className="flex items-start">
+                      <Shield className="w-6 h-6 text-green-600 mr-4 mt-1 flex-shrink-0" />
+                      <p className="text-lg leading-relaxed">{rule}</p>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </Container>
       </Section>
@@ -681,54 +862,83 @@ Request an Invite
             <p className="text-gray-600 max-w-3xl mx-auto mb-8">{COPY.how.note}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-            {COPY.how.steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="p-8">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-black text-white font-bold text-xl mb-6">
+          {/* Vertical Timeline */}
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+              
+              {COPY.how.steps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="relative flex items-start mb-12 last:mb-0"
+                >
+                  {/* Timeline dot */}
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-black text-white font-bold text-xl mr-8 relative z-10">
                     {index + 1}
                   </div>
-                  <p className="text-lg font-medium leading-relaxed">{step}</p>
-                </Card>
-              </motion.div>
-            ))}
+                  
+                  {/* Content */}
+                  <div className="flex-1 pt-2">
+                    <p className="text-lg font-semibold mb-2 text-gray-900">{step}</p>
+                    <div className="text-sm text-gray-600">
+                      {index === 0 && "Complete your profile and verify your role in the ecosystem."}
+                      {index === 1 && "Choose your preferred activities, skill level, and availability."}
+                      {index === 2 && "Select how often you want to meet: 3-5 times per month works best."}
+                      {index === 3 && "The app learns your preferences and suggests compatible members."}
+                      {index === 4 && "Reserve your spot with one tap - it syncs with your calendar."}
+                      {index === 5 && "Meet up, share notes, and get reminders to stay connected."}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </Container>
       </Section>
 
-      {/* Product Pillars */}
-      <Section className="py-32">
-        <Container>
+      {/* What Makes It Work - Apple Style Bold & Wide */}
+      <Section className="py-40 bg-gray-50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <motion.div 
-            className="text-center mb-20"
+            className="text-center mb-32"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-8">{COPY.pillars.title}</Headline>
+            <Headline level={2} className="text-5xl lg:text-6xl font-bold mb-8 tracking-tight">{COPY.pillars.title}</Headline>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {COPY.pillars.items.map((pillar, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="p-8">
-                  <h3 className="text-xl font-bold mb-4 tracking-tight">{pillar.name}</h3>
-                  <p className="text-gray-600 leading-relaxed">{pillar.body}</p>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-20">
+            {COPY.pillars.items.map((pillar, index) => {
+              const icons = [UserCheck, Target, Sparkles, Clock, BookOpen, Shield];
+              const Icon = icons[index];
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: index * 0.2 }}
+                  className="group text-center"
+                >
+                  <div className="mb-8">
+                    <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-3xl bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center mx-auto mb-8 group-hover:scale-105 transition-transform duration-500">
+                      <Icon className="w-12 h-12 lg:w-14 lg:h-14 text-white" />
+                    </div>
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-6 tracking-tight text-gray-900">{pillar.name}</h3>
+                    <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-sm mx-auto">{pillar.body}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-        </Container>
+          
+          {/* Add some extra breathing room */}
+          <div className="mt-32"></div>
+        </div>
       </Section>
 
       {/* Matching System */}
@@ -744,7 +954,65 @@ Request an Invite
             <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
               {COPY.matching.body}
             </Subcopy>
-            <p className="text-gray-600 italic">{COPY.matching.note}</p>
+            <p className="text-gray-600 italic mb-16">{COPY.matching.note}</p>
+          </motion.div>
+          
+          {/* Product Simulation - Matching Interface */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="bg-white rounded-3xl p-6 shadow-lg border border-gray-200">
+              <div className="text-center mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Your suggestions for this week</h3>
+                <p className="text-sm text-gray-600">Tuesday • 7:00 AM • Regent's Park Track</p>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Suggestion 1 */}
+                <div className="flex items-center justify-between p-4 bg-green-50 rounded-2xl border border-green-200">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">AK</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Alex • GP at Atlas Ventures</p>
+                      <p className="text-xs text-gray-600">Similar pace • 15 min travel</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">95% match</span>
+                  </div>
+                </div>
+                
+                {/* Suggestion 2 */}
+                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">SM</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Sarah • CTO at TechCorp</p>
+                      <p className="text-xs text-gray-600">Same level • 8 min travel</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">92% match</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 mt-6">
+                <button className="flex-1 bg-gray-900 text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors">
+                  Add to Calendar
+                </button>
+                <button className="px-4 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors">
+                  Pass
+                </button>
+              </div>
+            </div>
           </motion.div>
         </Container>
       </Section>
@@ -770,13 +1038,19 @@ Request an Invite
               <div className="flex gap-2 bg-gray-100 p-2 rounded-full">
                 <Pill 
                   active={selectedCity === 'london'}
-                  onClick={() => setSelectedCity('london')}
+                  onClick={() => {
+                    trackEvent('city_tab_click', { city: 'London', section: 'rituals' });
+                    setSelectedCity('london');
+                  }}
                 >
                   London
                 </Pill>
                 <Pill 
                   active={selectedCity === 'ny'}
-                  onClick={() => setSelectedCity('ny')}
+                  onClick={() => {
+                    trackEvent('city_tab_click', { city: 'New York', section: 'rituals' });
+                    setSelectedCity('ny');
+                  }}
                 >
                   New York
                 </Pill>
@@ -817,121 +1091,49 @@ Request an Invite
         </Container>
       </Section>
 
-      {/* Quiet Signals */}
+      {/* Quarterly Gatherings Section */}
       <Section className="py-32 bg-gray-50">
         <Container>
-          <motion.div 
-            className="text-center mb-20"
-            initial={fadeInUp.initial}
-            animate={fadeInUp.animate}
-            transition={fadeInUpTransition}
-          >
-            <Headline level={2} className="mb-8">{COPY.signals.title}</Headline>
-            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
-              {COPY.signals.intro}
-            </Subcopy>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {COPY.signals.items.map((signal, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              transition={fadeInUpTransition}
+            >
+              <Headline level={2} className="mb-8">{COPY.gatherings.title}</Headline>
+              <Subcopy className="text-xl leading-relaxed mb-12">
+                {COPY.gatherings.body}
+              </Subcopy>
+              <CTA 
+                variant="ghost"
+                onClick={() => {
+                  trackEvent('gathering_view', { location: 'gatherings_section' });
+                }}
               >
-                <Card className="p-8">
-                  <h3 className="text-xl font-bold mb-4 tracking-tight">{signal.name}</h3>
-                  <p className="text-gray-600 leading-relaxed">{signal.body}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <p className="text-sm text-gray-600 font-medium">{COPY.signals.note}</p>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Member Kit */}
-      <Section className="py-32">
-        <Container>
-          <motion.div 
-            className="text-center mb-20"
-            initial={fadeInUp.initial}
-            animate={fadeInUp.animate}
-            transition={fadeInUpTransition}
-          >
-            <Headline level={2} className="mb-8">{COPY.kit.title}</Headline>
-            <Subcopy className="max-w-4xl mx-auto text-lg mb-12">
-              {COPY.kit.body}
-            </Subcopy>
-          </motion.div>
-
-          <div className="max-w-2xl mx-auto">
-            <Card className="p-12">
-              <div className="space-y-6">
-                {COPY.kit.list.map((item, index) => (
-                  <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <div className="w-3 h-3 bg-green-600 rounded-full mr-4 flex-shrink-0"></div>
-                    <span className="text-lg">{item}</span>
-                  </div>
-                ))}
+                {COPY.gatherings.cta}
+              </CTA>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 rounded-3xl flex items-center justify-center">
+                <div className="text-center text-gray-500">
+                  <Users className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-sm font-medium">Quarterly Gathering Image</p>
+                  <p className="text-xs mt-1">Members connecting in the city</p>
+                </div>
               </div>
-              
-              <div className="mt-12 text-center">
-                <CTA 
-                  variant="solid"
-                  onClick={() => {
-                    trackEvent('order_kit_click', { location: 'member_kit' });
-                    // Kit ordering functionality would go here
-                  }}
-                >
-                  {COPY.kit.cta}
-                </CTA>
-              </div>
-            </Card>
+            </motion.div>
           </div>
         </Container>
       </Section>
 
-      {/* Trust and Rules */}
-      <Section id="trust" className="py-32 bg-gray-50">
-        <Container>
-          <motion.div 
-            className="text-center mb-20"
-            initial={fadeInUp.initial}
-            animate={fadeInUp.animate}
-            transition={fadeInUpTransition}
-          >
-            <Headline level={2} className="mb-8">{COPY.trust.title}</Headline>
-            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
-              {COPY.trust.intro}
-            </Subcopy>
-          </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {COPY.trust.bullets.map((rule, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <Card className="p-8">
-                    <div className="flex items-start">
-                      <Shield className="w-6 h-6 text-green-600 mr-4 mt-1 flex-shrink-0" />
-                      <p className="text-lg leading-relaxed">{rule}</p>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
+
 
       {/* Cities and Plans */}
       <Section className="py-32">
@@ -1087,10 +1289,15 @@ Request an Invite
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="p-8">
-                  <p className="text-lg italic leading-relaxed mb-6">"{quote}"</p>
+                  <p className="text-lg italic leading-relaxed mb-6">"{quote.text}"</p>
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-gray-200 rounded-full mr-4"></div>
-                    <div className="text-sm text-gray-600">Member</div>
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full mr-4 flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">{quote.name.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">{quote.name}</div>
+                      <div className="text-sm text-gray-600">{quote.role}</div>
+                    </div>
                   </div>
                 </Card>
               </motion.div>
@@ -1213,6 +1420,57 @@ Request an Invite
               </form>
             </Card>
           </motion.div>
+        </Container>
+      </Section>
+
+      {/* Member Kit - With Image Placeholders */}
+      <Section className="py-32 bg-gray-50">
+        <Container>
+          <motion.div 
+            className="text-center mb-20"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
+          >
+            <Headline level={2} className="mb-8">{COPY.kit.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-12">
+              {COPY.kit.body}
+            </Subcopy>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+            {COPY.kit.list.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="bg-white rounded-3xl p-8 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl mb-6 flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <div className="w-16 h-16 bg-gray-400 rounded-lg mb-2 mx-auto opacity-60"></div>
+                      <p className="text-xs font-medium">{item}</p>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-center text-gray-900">{item}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <CTA 
+              variant="solid"
+              onClick={() => {
+                trackEvent('order_kit_click', { location: 'member_kit' });
+                // Kit ordering functionality would go here
+              }}
+            >
+              {COPY.kit.cta}
+            </CTA>
+          </div>
         </Container>
       </Section>
 
