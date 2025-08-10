@@ -21,24 +21,19 @@ import {
   MapPin,
   Users,
   Calendar,
-  Repeat,
   Shield,
   Eye,
   Heart,
   Zap,
-  Clock,
-  Star,
   ChevronDown,
   ChevronUp,
   ArrowRight,
   Check,
-  Globe,
-  Gauge
+  Globe
 } from 'lucide-react';
 
 // Brand constants
 const BRAND = 'Cadence';
-const ACCENT = '#4ADE80'; // Mint green
 
 // Copy constants
 const COPY = {
@@ -147,28 +142,7 @@ const COPY = {
   }
 };
 
-// SEO Meta (commented for integration)
-const SEO_META = `
-  <title>${BRAND} - ${COPY.hero.valuePromise}</title>
-  <meta name="description" content="${COPY.hero.headline}" />
-  <meta name="canonical" href="https://cadence.app" />
-  <meta property="og:title" content="${BRAND} - ${COPY.hero.valuePromise}" />
-  <meta property="og:description" content="${COPY.hero.headline}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://cadence.app" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${BRAND} - ${COPY.hero.valuePromise}" />
-  <meta name="twitter:description" content="${COPY.hero.headline}" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "${BRAND}",
-    "description": "${COPY.hero.headline}",
-    "url": "https://cadence.app"
-  }
-  </script>
-`;
+// SEO Meta tags are now handled in app/layout.tsx and app/page.tsx
 
 // Internal Components
 const Page: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
@@ -177,8 +151,8 @@ const Page: React.FC<{ children: React.ReactNode; className?: string }> = ({ chi
   </div>
 );
 
-const Section: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <section className={`py-24 px-4 sm:px-6 lg:px-8 ${className}`}>
+const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => (
+  <section id={id} className={`py-24 px-4 sm:px-6 lg:px-8 ${className}`}>
     {children}
   </section>
 );
@@ -219,7 +193,7 @@ const CTA: React.FC<{
   children: React.ReactNode; 
   variant?: 'solid' | 'ghost';
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }> = ({ children, variant = 'solid', className = '', onClick }) => {
   const baseClasses = 'inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]';
   const variants = {
@@ -277,7 +251,7 @@ const AccentBadge: React.FC<{ children: React.ReactNode; className?: string }> =
 );
 
 const Feature: React.FC<{ 
-  icon: React.ComponentType<any>; 
+  icon: React.ComponentType<{ className?: string }>; 
   title: string; 
   description: string;
   className?: string;
@@ -464,9 +438,10 @@ const HomePage: React.FC = () => {
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
+    animate: { opacity: 1, y: 0 }
   };
+
+  const fadeInUpTransition = { duration: 0.6 };
 
   return (
     <Page className={isDark ? 'dark' : ''}>
@@ -564,6 +539,7 @@ const HomePage: React.FC = () => {
             initial="initial"
             animate="animate"
             variants={fadeInUp}
+            transition={fadeInUpTransition}
           >
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               <AccentBadge>Invite-only</AccentBadge>
@@ -616,7 +592,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Subcopy className="mb-8">Built for founders, operators, and investors who train.</Subcopy>
             <div className="flex flex-wrap justify-center gap-4">
@@ -634,7 +612,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-6">How it works</Headline>
             <Subcopy className="max-w-2xl mx-auto">
@@ -669,7 +649,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-6">Built different</Headline>
             <Subcopy className="max-w-2xl mx-auto">
@@ -701,7 +683,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-6">Sports & formats</Headline>
             <Subcopy className="max-w-2xl mx-auto">
@@ -755,7 +739,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-6">Integrity by design</Headline>
             <Subcopy className="max-w-2xl mx-auto">
@@ -822,7 +808,11 @@ const HomePage: React.FC = () => {
       <Section className="bg-[#F5F5F7]/[0.01]">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div {...fadeInUp}>
+            <motion.div 
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              transition={fadeInUpTransition}
+            >
               <Headline level={2} className="mb-6">City-level discovery</Headline>
               <Subcopy className="mb-8">
                 See vetted members in your area. No precise location until you both accept a session.
@@ -873,7 +863,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="max-w-2xl mx-auto"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <div className="text-center mb-12">
               <Headline level={2} className="mb-6">Request an invite</Headline>
@@ -970,7 +962,6 @@ const HomePage: React.FC = () => {
                   <CTA
                     variant="solid"
                     className={`flex-1 justify-center ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    onClick={isFormValid ? undefined : (e) => e.preventDefault()}
                   >
                     {COPY.ctas.primary}
                     <ArrowRight className="ml-2 w-4 h-4" />
@@ -990,7 +981,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center mb-16"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-6">Questions</Headline>
             <Subcopy className="max-w-2xl mx-auto">
@@ -1015,7 +1008,9 @@ const HomePage: React.FC = () => {
         <Container>
           <motion.div 
             className="text-center max-w-3xl mx-auto"
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-8">
               Ready to train with elite peers?

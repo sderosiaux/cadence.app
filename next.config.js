@@ -2,7 +2,6 @@
 const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
 
@@ -90,13 +89,7 @@ const nextConfig = {
       );
     }
 
-    // Optimize for production
-    if (!dev && !isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'framer-motion': 'framer-motion/dist/framer-motion',
-      };
-    }
+    // Optimize for production (removed framer-motion alias as it causes issues)
 
     return config;
   },
