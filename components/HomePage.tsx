@@ -26,8 +26,7 @@ import {
   ChevronDown,
   ChevronUp,
   ArrowRight,
-  Check,
-  Globe
+  Check
 } from 'lucide-react';
 
 // Brand constants
@@ -407,7 +406,6 @@ const SponsorScore: React.FC = () => (
 
 // Main HomePage Component
 const HomePage: React.FC = () => {
-  const [selectedCity, setSelectedCity] = useState('London');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -495,7 +493,11 @@ const HomePage: React.FC = () => {
               >
                 FAQ
               </motion.a>
-              <CTA variant="solid" className="text-sm px-6 py-2">
+              <CTA 
+                variant="solid" 
+                className="text-sm px-6 py-2"
+                onClick={() => document.getElementById('invite-form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 {COPY.ctas.primary}
               </CTA>
             </div>
@@ -539,7 +541,11 @@ const HomePage: React.FC = () => {
                   <a href="#faq" className="block text-gray-600 hover:text-gray-900 transition-colors">
                     FAQ
                   </a>
-                  <CTA variant="solid" className="w-full justify-center">
+                  <CTA 
+                    variant="solid" 
+                    className="w-full justify-center"
+                    onClick={() => document.getElementById('invite-form')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
                     {COPY.ctas.primary}
                   </CTA>
                 </div>
@@ -577,7 +583,10 @@ const HomePage: React.FC = () => {
 
               {/* CTAs with more space */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
-                <CTA variant="solid">
+                <CTA 
+                  variant="solid"
+                  onClick={() => document.getElementById('invite-form')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   {COPY.ctas.primary}
                 </CTA>
                 <CTA variant="ghost">
@@ -585,19 +594,9 @@ const HomePage: React.FC = () => {
                 </CTA>
               </div>
 
-              {/* City selector - cleaner presentation */}
-              <div className="space-y-12">
-                <div className="flex justify-center gap-6">
-                  {COPY.cities.map((city) => (
-                    <Pill
-                      key={city}
-                      active={selectedCity === city}
-                      onClick={() => setSelectedCity(city)}
-                    >
-                      {city}
-                    </Pill>
-                  ))}
-                </div>
+              {/* Simple location indicator */}
+              <div className="text-center">
+                <p className="text-gray-500">Currently available in {COPY.cities.join(' and ')}</p>
               </div>
             </div>
           </motion.div>
@@ -893,13 +892,8 @@ const HomePage: React.FC = () => {
                 See vetted members in your city. Privacy-first until you're both ready to train.
               </Subcopy>
               
-              <div className="flex flex-wrap gap-4 mb-10">
-                {COPY.cities.map((city) => (
-                  <Pill key={city} active={city === selectedCity}>
-                    <Globe className="w-4 h-4 mr-2" />
-                    {city}
-                  </Pill>
-                ))}
+              <div className="text-sm text-gray-500 mb-10">
+                Available in {COPY.cities.join(' and ')}
               </div>
               
               <div className="mt-8">
@@ -936,7 +930,7 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Invite Form */}
-      <Section className="py-32">
+      <Section id="invite-form" className="py-32">
         <Container>
           <motion.div 
             className="max-w-3xl mx-auto"
@@ -1095,7 +1089,11 @@ const HomePage: React.FC = () => {
             <Subcopy className="mb-16 text-lg">
               Join the private network for founders and operators who take their sport seriously.
             </Subcopy>
-            <CTA variant="solid" className="text-lg px-16 py-5">
+            <CTA 
+              variant="solid" 
+              className="text-lg px-16 py-5"
+              onClick={() => document.getElementById('invite-form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               {COPY.ctas.primary}
               <ArrowRight className="ml-3 w-5 h-5" />
             </CTA>
