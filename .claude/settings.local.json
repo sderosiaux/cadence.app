@@ -9,7 +9,11 @@
       "Bash(npm run typecheck:*)",
       "Bash(npm run lint)",
       "Bash(npm run build:*)",
-      "mcp__sequential-thinking__sequentialthinking"
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(cat:*)",
+      "Bash(ANALYZE=true npm run build)",
+      "Bash(npm uninstall:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }

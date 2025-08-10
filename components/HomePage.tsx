@@ -284,7 +284,7 @@ const HomePage: React.FC = () => {
   const fadeInUpTransition = { duration: 0.6 };
 
   // Analytics tracking functions
-  const trackEvent = (eventName: string, properties?: Record<string, any>) => {
+  const trackEvent = (eventName: string, properties?: Record<string, unknown>) => {
     // In production, this would connect to your analytics service (Google Analytics, Mixpanel, etc.)
     if (typeof window !== 'undefined') {
       console.log('Analytics Event:', eventName, properties);
@@ -634,6 +634,10 @@ Request an Invite
                 src={getAssetPath('/london.png')}
                 alt="Elite founders training together in London"
                 className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={600}
               />
               {/* Elegant overlay with content */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
@@ -983,6 +987,10 @@ Request an Invite
                 src={getAssetPath('/nyc.png')}
                 alt="Weekly tennis sessions with NYC founders"
                 className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={600}
               />
               {/* Elegant overlay with content and metrics */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">
