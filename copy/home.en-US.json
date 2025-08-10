@@ -1,7 +1,8 @@
 {
   "hero": {
-    "h1": "Train with peers who run your pace",
-    "subhead": "Private sports-led matches for top founders and execs in London and New York. Small groups. Real ties that last.",
+    "h1": "Connect through sport with peers at your level",
+    "subhead": "Invite-only workouts for founders, operators, and VCs in London and New York. Small groups. Clear talk. Strong ties that last.",
+    "emotionalLine": "You push hard. You carry real weight. You want people from your high-quality ecosystem who can keep up and care. We help you find them and know them on sight.",
     "ctaPrimaryLondon": "Apply for London",
     "ctaPrimaryNY": "Apply for New York",
     "ctaSecondary": "How it works",
@@ -9,58 +10,61 @@
   },
   "who": {
     "title": "Who we serve",
+    "body": "You run a company, a fund, or both. Your time is tight. You train most weeks. You want peers from your circle who value effort, truth, and clear plans. You prefer small rooms where good talk happens fast.",
     "bullets": [
-      "VC-backed founders, senior operators, and investors who train most weeks",
-      "Value time and small groups",
-      "Want sharp talk, no noise"
+      "VC-backed founders from pre-seed to growth",
+      "Senior operators who own hard problems",
+      "VCs, angels, and fund partners who stay active"
     ]
   },
   "problem": {
     "title": "The problem",
-    "body": "You meet many people. Few match your pace, schedule, and mind. Big rooms drain energy. Follow-up fades."
+    "body": "You meet many people. Few match your pace, your hours, or your drive. Big rooms drain energy. Calendars get in the way. A strong first chat fades when plans slip and life gets loud."
   },
   "promise": {
     "title": "The promise",
-    "body": "Meet the right two people this week for a workout and a real talk. We plan. You show up. You keep the tie alive."
+    "body": "Meet the right two people this week from your high-quality ecosystem. Train together. Share what matters. Leave with a next step. We plan the slot and the place, then help you keep the tie alive."
   },
   "why": {
     "title": "Why this wins",
     "items": [
-      "Sports lower the guard fast",
-      "1:1 and triads keep it simple",
-      "Local. Level-matched. Time-matched",
-      "A concierge agent handles the plan",
-      "Invite only. Verified. Quiet"
+      { "headline": "Connection first", "copy": "We bring peers from your high-quality circle. Sport is the way in, not the end." },
+      { "headline": "Tiny groups, real talk", "copy": "1:1 and triads keep things simple and honest. The right size for trust." },
+      { "headline": "Made for your day", "copy": "We match level, time windows, and travel radius. You meet close by and on time." },
+      { "headline": "A concierge handles the plan", "copy": "It reads your calendar, proposes slots, books, and rebooks when life moves." },
+      { "headline": "Invite-only and quiet", "copy": "Verified roles. Clear norms. No pitches. No noise." }
     ]
   },
   "how": {
     "title": "How it works",
+    "lead": "Simple steps. Little friction. Strong follow-through.",
     "steps": [
       "Apply and verify",
-      "Set sport, pace band, and windows",
+      "Set sport, pace, and time windows",
       "Get two matches per week",
       "Show up. Train. Talk",
       "Keep the tie alive with quick nudges"
     ],
-    "note": "Works with Google or Apple Calendar. Reads Strava to set pace bands on request."
+    "note": "Works with Google or Apple Calendar. Reads Strava on request to set pace bands."
   },
   "pillars": {
     "title": "What makes it work",
     "items": [
-      { "name": "Curation", "body": "Invite-only with real-name checks and trusted refs" },
-      { "name": "Matching", "body": "Sport, level, time, area, stage, topics" },
-      { "name": "Rituals", "body": "Fixed slots and venues so meets happen by default" },
-      { "name": "Memory", "body": "Light CRM with last met, notes, and next touch" },
-      { "name": "Concierge", "body": "Plans, books, reminds, and rebooks when life moves" }
+      { "name": "Curation", "body": "Invite-only with real-name checks and trusted refs. We keep a high bar so your time stays clean." },
+      { "name": "Matching", "body": "Person fit first, then sport and level. Time, area, company stage, and talk topics round it out. You see why a match fits in plain words." },
+      { "name": "Rituals", "body": "Fixed slots and partner venues. The plan exists each week, so meets happen by default." },
+      { "name": "Memory", "body": "A light place for notes, last met, and the next touch. You remember what matters and when to meet again." },
+      { "name": "Concierge", "body": "A smart helper that plans, books, reminds, and rebooks. It keeps the meet safe from calendar chaos." }
     ]
   },
   "matching": {
-    "title": "Matching that respects your time",
-    "body": "We score sport and level first. We lock time windows that fit. We map a short travel radius. We add stage and topic fit. We prefer triads so a drop still leaves a strong 1:1.",
-    "note": "You can pass on a match. Passes train the model."
+    "title": "Matching that builds the right ties",
+    "body": "We start with people and fit. Role, stage, and talk topics set the tone. Then we confirm sport and level so the session flows. We lock time windows that fit your week. We map a short travel radius near home or office. We favor triads so if one person drops, a strong 1:1 still runs.",
+    "note": "You can pass on a match with one tap. Passes teach the system what you like."
   },
   "rituals": {
     "title": "Rituals that stick",
+    "body": "Set days and venue blocks mean you do not plan from scratch. A host opens the session. You warm up, work, cool down, then take ten minutes for a short chat that lands a next step.",
     "tabs": {
       "london": {
         "name": "London",
@@ -79,58 +83,94 @@
         ]
       }
     },
-    "note": "We book blocks so you can drop in. You can request other slots."
+    "note": "We book venue blocks. You can request other slots."
+  },
+  "signals": {
+    "title": "Quiet signals",
+    "intro": "Members can spot each other at tracks, gyms, and coffee lines. Signals stay discreet and opt-in.",
+    "items": [
+      { "name": "Glyph", "body": "A small mark on a cap or tee. No big logo. Subtle and clean." },
+      { "name": "Band", "body": "A slim wrist band with a city color and tiny pace dots. Easy to wear. Easy to hide." },
+      { "name": "Lace tag", "body": "A small tag on a shoe lace. Metal or nylon. Stays quiet and lasts." },
+      { "name": "Wallet pass", "body": "An Apple Wallet pass for check-in and a quick flash when you meet a peer." },
+      { "name": "Phrase", "body": "A simple hello that members know. \"Morning pace?\" works anywhere." },
+      { "name": "Venue tile", "body": "A small desk tile at partner gyms to mark the meet point." }
+    ],
+    "note": "You can turn signals on or off anytime."
+  },
+  "kit": {
+    "title": "Member kit",
+    "body": "New members can order a small starter kit. It ships with discreet gear you can wear on any day. No loud brand. Durable pieces only.",
+    "list": [
+      "Cap with stitched glyph",
+      "Lace tag with NFC for check-in and referrals",
+      "Slim wrist band with city color",
+      "Sticker pack for phone or bottle"
+    ],
+    "cta": "Order your kit"
   },
   "trust": {
     "title": "Trust and rules",
+    "intro": "This is a quiet space for people who value time and respect. Simple norms keep meets strong.",
     "bullets": [
       "Invite only. Each member can sponsor one person per month",
       "Proof of role with LinkedIn or an investor ref",
-      "Simple code of conduct. No pitching. On time. No photos without consent",
+      "No pitching. On time. No photos without consent",
       "Public venues and partner gyms. Live location toggle",
       "Small deposit per meet. No-shows lose the deposit. On-time shows earn credits",
-      "Private by default. You control contact share"
+      "Private by default. You control contact share and recognition mode"
     ]
   },
   "cities": {
     "title": "Cities and plans",
+    "intro": "Start in your city. Swap to the other city when you travel.",
     "cards": [
       { "city": "London", "price": "From £150 per month", "note": "Founding cohort gets 90 days free" },
       { "city": "New York", "price": "From $200 per month", "note": "Dual-city plan $300 per month" }
     ],
-    "microcopy": "Pricing covers the service and set venue blocks. Extras at cost."
+    "microcopy": "Pricing covers the service and set venue blocks. Extras stay at cost."
+  },
+  "funds": {
+    "title": "For funds",
+    "body": "Give your founders a steady way to meet real peers. We run private blocks near your office in London and New York. GPs, partners, and portfolio leads train together, talk straight, and form ties that move across companies. We can add a small fund mark on gear for private groups.",
+    "cta": "Partner with us"
   },
   "proof": {
     "title": "Member notes",
     "quotes": [
-      "The triad format just works. Strong talk in 60 minutes.",
-      "I met two people I now see monthly.",
-      "Calendar holds show up on time. Zero fuss."
-    ]
+      "I met a GP and a CTO at the track. We now meet every four weeks.",
+      "I like how the plan shows up on my phone with a map and a pace band. Zero fuss.",
+      "The triad format just works. Strong talk in 60 minutes."
+    ],
+    "logosNote": "Partner gyms and friendly funds",
+    "logosAlt": ["Gym logo", "Fund logo", "Club logo"]
   },
   "faq": {
     "title": "FAQ",
     "qa": [
-      { "q": "Why sports?", "a": "Sweat builds trust faster than coffee." },
-      { "q": "How big are the groups?", "a": "1:1 or triads." },
-      { "q": "What if someone cancels?", "a": "The agent rebooks. A triad rolls to a 1:1." },
-      { "q": "What sports do you cover?", "a": "Running, strength, and rowing first. Boxing and rides next." },
-      { "q": "Do you share data?", "a": "No. Private by default and opt-in for contact share." },
-      { "q": "Are venues included?", "a": "We cover set blocks. You cover extras like class fees." }
+      { "q": "How do members recognize each other?", "a": "We use quiet signals. A small glyph on a cap or tee. A slim wrist band. A shoe lace tag. All opt-in. You can turn them off anytime." },
+      { "q": "Why sports?", "a": "Training makes people open and direct. It builds trust fast and helps you form real ties." },
+      { "q": "How big are the groups?", "a": "1:1 or triads. That size keeps plans simple and talk sharp." },
+      { "q": "What if someone cancels?", "a": "The concierge rebooks fast. A triad rolls to a 1:1 so the hour still counts." },
+      { "q": "What sports do you cover?", "a": "Running, strength, and rowing first. Boxing and rides next as we add venues." },
+      { "q": "Do you share data?", "a": "No. It stays private by default. You choose what to share and with whom." },
+      { "q": "Are venues included?", "a": "We cover set blocks with partners. Extra classes and gear stay at cost." },
+      { "q": "Can funds join?", "a": "Yes. We run private blocks for funds and their portfolios in each city." }
     ]
   },
   "finalCta": {
-    "title": "Ready to train with peers",
+    "title": "Ready to connect through sport",
+    "body": "Apply now. We review new members each week. We keep a high bar so the room stays right.",
     "ctaLondon": "Apply for London",
     "ctaNY": "Apply for New York",
-    "ctaRefer": "Refer a peer",
-    "note": "We approve new members weekly."
+    "ctaRefer": "Refer a peer"
   },
   "footer": {
-    "contact": "Questions. Email hello@cadence.app or message +44 7000 000000."
+    "contact": "Questions. Email [CONTACT_EMAIL] or message [WHATSAPP_NUMBER].",
+    "links": ["How it works", "Cities", "Apply", "Refer", "Privacy", "Terms", "Press"]
   },
   "seo": {
-    "title": "Private sports matches for top founders in London and New York",
-    "description": "Invite-only 1:1 and triad workouts for founders and execs. Smart matching. Local rituals. Apply for London or New York."
+    "title": "Connect with founders, operators, and VCs through sport in London and New York",
+    "description": "Invite-only 1:1 and triad workouts that spark real ties across your high-quality ecosystem. Quiet member signals. Local rituals. Apply for London or New York."
   }
 }

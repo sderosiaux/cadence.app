@@ -24,6 +24,7 @@ import {
   Menu,
   X,
   MapPin,
+  Users,
   Calendar,
   Shield,
   ChevronDown,
@@ -467,9 +468,16 @@ Request an Invite
               </Headline>
               
               {/* Subheadline with more breathing room */}
-              <Subcopy className="mb-20 max-w-4xl mx-auto">
+              <Subcopy className="mb-12 max-w-4xl mx-auto">
                 {COPY.hero.subhead}
               </Subcopy>
+
+              {/* Emotional line */}
+              <div className="mb-20 max-w-4xl mx-auto">
+                <p className="text-lg text-gray-600 leading-relaxed italic">
+                  {COPY.hero.emotionalLine}
+                </p>
+              </div>
 
               {/* CTAs with city-specific options */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
@@ -528,7 +536,10 @@ Request an Invite
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-12">{COPY.who.title}</Headline>
+            <Headline level={2} className="mb-8">{COPY.who.title}</Headline>
+            <Subcopy className="mb-12 max-w-4xl mx-auto text-lg">
+              {COPY.who.body}
+            </Subcopy>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {COPY.who.bullets.map((bullet, index) => (
                 <motion.div
@@ -595,11 +606,12 @@ Request an Invite
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="p-8 text-center">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 font-bold text-lg mb-6 mx-auto">
+                <Card className="p-8">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 font-bold text-lg mb-6">
                     <Check className="w-6 h-6" />
                   </div>
-                  <p className="text-lg font-medium">{item}</p>
+                  <h3 className="text-xl font-bold mb-4 tracking-tight">{item.headline}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.copy}</p>
                 </Card>
               </motion.div>
             ))}
@@ -659,9 +671,10 @@ Request an Invite
             transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-8">{COPY.how.title}</Headline>
-            <Subcopy className="max-w-3xl mx-auto text-lg mb-8">
-              {COPY.how.note}
+            <Subcopy className="max-w-3xl mx-auto text-lg mb-4">
+              {COPY.how.lead}
             </Subcopy>
+            <p className="text-gray-600 max-w-3xl mx-auto mb-8">{COPY.how.note}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
@@ -742,6 +755,9 @@ Request an Invite
             transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-8">{COPY.rituals.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
+              {COPY.rituals.body}
+            </Subcopy>
             <p className="text-gray-600 mb-8">{COPY.rituals.note}</p>
           </motion.div>
 
@@ -797,6 +813,85 @@ Request an Invite
         </Container>
       </Section>
 
+      {/* Quiet Signals */}
+      <Section className="py-32 bg-gray-50">
+        <Container>
+          <motion.div 
+            className="text-center mb-20"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
+          >
+            <Headline level={2} className="mb-8">{COPY.signals.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
+              {COPY.signals.intro}
+            </Subcopy>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {COPY.signals.items.map((signal, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="p-8">
+                  <h3 className="text-xl font-bold mb-4 tracking-tight">{signal.name}</h3>
+                  <p className="text-gray-600 leading-relaxed">{signal.body}</p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-sm text-gray-600 font-medium">{COPY.signals.note}</p>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Member Kit */}
+      <Section className="py-32">
+        <Container>
+          <motion.div 
+            className="text-center mb-20"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={fadeInUpTransition}
+          >
+            <Headline level={2} className="mb-8">{COPY.kit.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-12">
+              {COPY.kit.body}
+            </Subcopy>
+          </motion.div>
+
+          <div className="max-w-2xl mx-auto">
+            <Card className="p-12">
+              <div className="space-y-6">
+                {COPY.kit.list.map((item, index) => (
+                  <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div className="w-3 h-3 bg-green-600 rounded-full mr-4 flex-shrink-0"></div>
+                    <span className="text-lg">{item}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-12 text-center">
+                <CTA 
+                  variant="solid"
+                  onClick={() => {
+                    trackEvent('order_kit_click', { location: 'member_kit' });
+                    // Kit ordering functionality would go here
+                  }}
+                >
+                  {COPY.kit.cta}
+                </CTA>
+              </div>
+            </Card>
+          </div>
+        </Container>
+      </Section>
+
       {/* Trust and Rules */}
       <Section id="trust" className="py-32 bg-gray-50">
         <Container>
@@ -807,6 +902,9 @@ Request an Invite
             transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-8">{COPY.trust.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
+              {COPY.trust.intro}
+            </Subcopy>
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
@@ -841,6 +939,9 @@ Request an Invite
             transition={fadeInUpTransition}
           >
             <Headline level={2} className="mb-8">{COPY.cities.title}</Headline>
+            <Subcopy className="max-w-4xl mx-auto text-lg mb-8">
+              {COPY.cities.intro}
+            </Subcopy>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -900,6 +1001,60 @@ Request an Invite
               </div>
             </div>
           </motion.div>
+        </Container>
+      </Section>
+
+      {/* For Funds */}
+      <Section className="py-32 bg-gray-50">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
+            <motion.div 
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              transition={fadeInUpTransition}
+            >
+              <Headline level={2} className="mb-8">{COPY.funds.title}</Headline>
+              <Subcopy className="mb-12 text-lg leading-relaxed">
+                {COPY.funds.body}
+              </Subcopy>
+              <CTA 
+                variant="solid"
+                onClick={() => {
+                  trackEvent('partner_cta_click', { location: 'funds_section' });
+                  // Partner form would go here
+                }}
+              >
+                {COPY.funds.cta}
+              </CTA>
+            </motion.div>
+            
+            <div className="flex justify-center">
+              <Card className="p-12 max-w-md">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Users className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 tracking-tight">Fund partnerships</h3>
+                  <p className="text-gray-600">Private blocks for portfolio companies</p>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3" />
+                    <span>GP and partner access</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3" />
+                    <span>Portfolio founder matches</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3" />
+                    <span>Custom fund branding</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
         </Container>
       </Section>
 
@@ -1093,7 +1248,7 @@ Request an Invite
               {COPY.finalCta.title}
             </Headline>
             <Subcopy className="mb-16 text-lg">
-              {COPY.finalCta.note}
+              {COPY.finalCta.body}
             </Subcopy>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <CTA 
