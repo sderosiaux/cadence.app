@@ -13,6 +13,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
   Menu,
   X,
@@ -617,10 +618,12 @@ const HomePage: React.FC = () => {
           >
             {/* Hero training image */}
             <div className="absolute inset-0">
-              <img 
+              <Image 
                 src="/london.png" 
                 alt="Elite founders training together in London"
-                className="w-full h-full object-contain"
+                fill
+                className="object-contain"
+                priority
               />
               {/* Elegant overlay with content */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
@@ -786,10 +789,11 @@ const HomePage: React.FC = () => {
           >
             {/* Network training image */}
             <div className="absolute inset-0">
-              <img 
+              <Image 
                 src="/nyc.png" 
                 alt="Weekly tennis sessions with NYC founders"
-                className="w-full h-full object-contain"
+                fill
+                className="object-contain"
               />
               {/* Elegant overlay with content and metrics */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">

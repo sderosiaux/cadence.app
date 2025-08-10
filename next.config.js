@@ -44,6 +44,8 @@ const nextConfig = {
   // Output configuration for GitHub Pages
   output: 'export',
   trailingSlash: true,
+  basePath: process.env.NODE_ENV === 'production' ? '/cadence.app' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/cadence.app' : '',
   images: {
     unoptimized: true
   },
