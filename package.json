@@ -1,0 +1,64 @@
+{
+  "name": "cadence-homepage",
+  "version": "1.0.0",
+  "description": "Premium Apple-style marketing homepage for Cadence - private, vetted, sports-first network",
+  "main": "HomePage.tsx",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "next": "^14.0.0",
+    "framer-motion": "^10.16.0",
+    "lucide-react": "^0.294.0",
+    "typescript": "^5.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/webpack-bundle-analyzer": "^4.6.0",
+    "webpack-bundle-analyzer": "^4.10.1"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.3.0"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "nextjs",
+    "tailwindcss",
+    "framer-motion",
+    "homepage",
+    "marketing",
+    "apple-style",
+    "premium",
+    "responsive",
+    "accessible"
+  ],
+  "author": "Claude Code",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/cadence-homepage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/cadence-homepage/issues"
+  },
+  "homepage": "https://cadence.app"
+}

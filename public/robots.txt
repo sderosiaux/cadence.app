@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Specific pages
+Allow: /
+Allow: /how-it-works
+Allow: /sports
+Allow: /integrity
+Allow: /faq
+
+# Block unnecessary crawling
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://cadence.app/sitemap.xml
