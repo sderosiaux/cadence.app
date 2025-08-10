@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "h1": "Train with peers who run your pace",
+    "subhead": "Private sports-led matches for top founders and execs in London and New York. Small groups. Real ties that last.",
+    "ctaPrimaryLondon": "Apply for London",
+    "ctaPrimaryNY": "Apply for New York",
+    "ctaSecondary": "How it works",
+    "proof": "Invite only. Verified roles. No spam."
+  },
+  "who": {
+    "title": "Who we serve",
+    "bullets": [
+      "VC-backed founders, senior operators, and investors who train most weeks",
+      "Value time and small groups",
+      "Want sharp talk, no noise"
+    ]
+  },
+  "problem": {
+    "title": "The problem",
+    "body": "You meet many people. Few match your pace, schedule, and mind. Big rooms drain energy. Follow-up fades."
+  },
+  "promise": {
+    "title": "The promise",
+    "body": "Meet the right two people this week for a workout and a real talk. We plan. You show up. You keep the tie alive."
+  },
+  "why": {
+    "title": "Why this wins",
+    "items": [
+      "Sports lower the guard fast",
+      "1:1 and triads keep it simple",
+      "Local. Level-matched. Time-matched",
+      "A concierge agent handles the plan",
+      "Invite only. Verified. Quiet"
+    ]
+  },
+  "how": {
+    "title": "How it works",
+    "steps": [
+      "Apply and verify",
+      "Set sport, pace band, and windows",
+      "Get two matches per week",
+      "Show up. Train. Talk",
+      "Keep the tie alive with quick nudges"
+    ],
+    "note": "Works with Google or Apple Calendar. Reads Strava to set pace bands on request."
+  },
+  "pillars": {
+    "title": "What makes it work",
+    "items": [
+      { "name": "Curation", "body": "Invite-only with real-name checks and trusted refs" },
+      { "name": "Matching", "body": "Sport, level, time, area, stage, topics" },
+      { "name": "Rituals", "body": "Fixed slots and venues so meets happen by default" },
+      { "name": "Memory", "body": "Light CRM with last met, notes, and next touch" },
+      { "name": "Concierge", "body": "Plans, books, reminds, and rebooks when life moves" }
+    ]
+  },
+  "matching": {
+    "title": "Matching that respects your time",
+    "body": "We score sport and level first. We lock time windows that fit. We map a short travel radius. We add stage and topic fit. We prefer triads so a drop still leaves a strong 1:1.",
+    "note": "You can pass on a match. Passes train the model."
+  },
+  "rituals": {
+    "title": "Rituals that stick",
+    "tabs": {
+      "london": {
+        "name": "London",
+        "list": [
+          "Tue 7:00 Track at Regent's Park",
+          "Thu 6:45 Strength in Shoreditch",
+          "Sat 8:00 Long run in Richmond Park or ride to Box Hill"
+        ]
+      },
+      "ny": {
+        "name": "New York",
+        "list": [
+          "Tue 7:00 Track at East River Park",
+          "Thu 6:45 Strength at Chelsea Piers",
+          "Sat 8:00 Hudson River tempo or Central Park loops"
+        ]
+      }
+    },
+    "note": "We book blocks so you can drop in. You can request other slots."
+  },
+  "trust": {
+    "title": "Trust and rules",
+    "bullets": [
+      "Invite only. Each member can sponsor one person per month",
+      "Proof of role with LinkedIn or an investor ref",
+      "Simple code of conduct. No pitching. On time. No photos without consent",
+      "Public venues and partner gyms. Live location toggle",
+      "Small deposit per meet. No-shows lose the deposit. On-time shows earn credits",
+      "Private by default. You control contact share"
+    ]
+  },
+  "cities": {
+    "title": "Cities and plans",
+    "cards": [
+      { "city": "London", "price": "From £150 per month", "note": "Founding cohort gets 90 days free" },
+      { "city": "New York", "price": "From $200 per month", "note": "Dual-city plan $300 per month" }
+    ],
+    "microcopy": "Pricing covers the service and set venue blocks. Extras at cost."
+  },
+  "proof": {
+    "title": "Member notes",
+    "quotes": [
+      "The triad format just works. Strong talk in 60 minutes.",
+      "I met two people I now see monthly.",
+      "Calendar holds show up on time. Zero fuss."
+    ]
+  },
+  "faq": {
+    "title": "FAQ",
+    "qa": [
+      { "q": "Why sports?", "a": "Sweat builds trust faster than coffee." },
+      { "q": "How big are the groups?", "a": "1:1 or triads." },
+      { "q": "What if someone cancels?", "a": "The agent rebooks. A triad rolls to a 1:1." },
+      { "q": "What sports do you cover?", "a": "Running, strength, and rowing first. Boxing and rides next." },
+      { "q": "Do you share data?", "a": "No. Private by default and opt-in for contact share." },
+      { "q": "Are venues included?", "a": "We cover set blocks. You cover extras like class fees." }
+    ]
+  },
+  "finalCta": {
+    "title": "Ready to train with peers",
+    "ctaLondon": "Apply for London",
+    "ctaNY": "Apply for New York",
+    "ctaRefer": "Refer a peer",
+    "note": "We approve new members weekly."
+  },
+  "footer": {
+    "contact": "Questions. Email hello@cadence.app or message +44 7000 000000."
+  },
+  "seo": {
+    "title": "Private sports matches for top founders in London and New York",
+    "description": "Invite-only 1:1 and triad workouts for founders and execs. Smart matching. Local rituals. Apply for London or New York."
+  }
+}

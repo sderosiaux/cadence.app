@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import copyData from '../copy/home.en-US.json';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cadence.app'),
   title: {
-    default: 'Cadence - Elite peers, zero noise',
+    default: copyData.seo.title,
     template: '%s | Cadence'
   },
-  description: 'A private, vetted, sports-first network for founders and operators.',
-  keywords: ['founders', 'operators', 'sports', 'networking', 'elite', 'private', 'vetted'],
+  description: copyData.seo.description,
+  keywords: ['founders', 'operators', 'sports', 'networking', 'elite', 'private', 'vetted', 'london', 'new york', 'venture-backed', 'investors', 'training'],
   authors: [{ name: 'Cadence Team' }],
   creator: 'Cadence',
   publisher: 'Cadence',
@@ -24,15 +25,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://cadence.app',
-    title: 'Cadence - Elite peers, zero noise',
-    description: 'A private, vetted, sports-first network for founders and operators.',
+    title: copyData.seo.title,
+    description: copyData.seo.description,
     siteName: 'Cadence',
+    images: [
+      {
+        url: '/london.png',
+        width: 1536,
+        height: 1024,
+        alt: 'Elite founders training together in London',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cadence - Elite peers, zero noise',
-    description: 'A private, vetted, sports-first network for founders and operators.',
+    title: copyData.seo.title,
+    description: copyData.seo.description,
     creator: '@cadence_app',
+    images: ['/london.png'],
   },
   verification: {
     google: 'google-site-verification-code',
