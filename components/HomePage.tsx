@@ -16,8 +16,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu,
   X,
-  Sun,
-  Moon,
   MapPin,
   Users,
   Calendar,
@@ -146,7 +144,7 @@ const COPY = {
 
 // Internal Components
 const Page: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <div className={`min-h-screen bg-[#0A0A0A] dark:bg-[#0A0A0A] text-[#F5F5F7] font-[ui-sans-serif,-apple-system,BlinkMacSystemFont,'SF_Pro_Text','Inter','Segoe_UI',Roboto,Helvetica,Arial,sans-serif] ${className}`}>
+  <div className={`min-h-screen bg-white text-gray-900 font-[ui-sans-serif,-apple-system,BlinkMacSystemFont,'SF_Pro_Text','Inter','Segoe_UI',Roboto,Helvetica,Arial,sans-serif] ${className}`}>
     {children}
   </div>
 );
@@ -184,7 +182,7 @@ const Headline: React.FC<{ children: React.ReactNode; className?: string; level?
 };
 
 const Subcopy: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <p className={`text-lg sm:text-xl text-[#F5F5F7]/80 leading-relaxed ${className}`}>
+  <p className={`text-lg sm:text-xl text-gray-600 leading-relaxed ${className}`}>
     {children}
   </p>
 );
@@ -195,10 +193,10 @@ const CTA: React.FC<{
   className?: string;
   onClick?: (e: React.MouseEvent) => void;
 }> = ({ children, variant = 'solid', className = '', onClick }) => {
-  const baseClasses = 'inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]';
+  const baseClasses = 'inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white';
   const variants = {
-    solid: 'bg-[#4ADE80] text-[#0A0A0A] hover:bg-[#4ADE80]/90 hover:-translate-y-0.5',
-    ghost: 'border border-[#F5F5F7]/20 text-[#F5F5F7] hover:border-[#4ADE80] hover:-translate-y-0.5'
+    solid: 'bg-[#4ADE80] text-white hover:bg-[#4ADE80]/90 hover:-translate-y-0.5',
+    ghost: 'border border-gray-300 text-gray-700 hover:border-[#4ADE80] hover:-translate-y-0.5'
   };
   
   return (
@@ -214,8 +212,8 @@ const Card: React.FC<{
   hoverable?: boolean;
 }> = ({ children, className = '', hoverable = true }) => (
   <div className={`
-    bg-[#F5F5F7]/[0.02] border border-[#F5F5F7]/[0.08] rounded-2xl backdrop-blur-sm p-8
-    ${hoverable ? 'hover:-translate-y-1 hover:border-[#4ADE80]/30 transition-all duration-200' : ''}
+    bg-gray-50 border border-gray-200 rounded-2xl backdrop-blur-sm p-8
+    ${hoverable ? 'hover:-translate-y-1 hover:border-[#4ADE80]/30 transition-all duration-200 hover:shadow-lg' : ''}
     ${className}
   `}>
     {children}
@@ -232,10 +230,10 @@ const Pill: React.FC<{
     className={`
       inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
       ${active 
-        ? 'bg-[#4ADE80] text-[#0A0A0A]' 
-        : 'bg-[#F5F5F7]/[0.05] text-[#F5F5F7]/80 hover:bg-[#F5F5F7]/[0.1]'
+        ? 'bg-[#4ADE80] text-white' 
+        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
       }
-      focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]
+      focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white
       ${className}
     `}
     onClick={onClick}
@@ -245,7 +243,7 @@ const Pill: React.FC<{
 );
 
 const AccentBadge: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20 ${className}`}>
+  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200 ${className}`}>
     {children}
   </span>
 );
@@ -264,7 +262,7 @@ const Feature: React.FC<{
     <Card hoverable={true}>
       <Icon className="w-8 h-8 text-[#4ADE80] mb-4" />
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-[#F5F5F7]/70">{description}</p>
+      <p className="text-gray-600">{description}</p>
     </Card>
   </motion.div>
 );
@@ -274,18 +272,18 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 
   return (
     <motion.div 
-      className="border-b border-[#F5F5F7]/10"
+      className="border-b border-gray-200"
       initial={false}
     >
       <button
-        className="flex items-center justify-between w-full py-6 text-left focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A] rounded"
+        className="flex items-center justify-between w-full py-6 text-left focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white rounded"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-lg font-medium">{question}</span>
         {isOpen ? (
           <ChevronUp className="w-5 h-5 text-[#4ADE80]" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-[#F5F5F7]/60" />
+          <ChevronDown className="w-5 h-5 text-gray-500" />
         )}
       </button>
       <AnimatePresence>
@@ -297,7 +295,7 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="pb-6 text-[#F5F5F7]/80">
+            <div className="pb-6 text-gray-600">
               {answer}
             </div>
           </motion.div>
@@ -310,7 +308,7 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => (
   <a 
     href={href} 
-    className="text-[#F5F5F7]/60 hover:text-[#F5F5F7] transition-colors duration-200"
+    className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
   >
     {children}
   </a>
@@ -338,7 +336,7 @@ const MapGlyph: React.FC<{ activeCity?: string }> = ({ activeCity }) => (
       cx="30" 
       cy="60" 
       r={activeCity === 'London' ? "6" : "4"} 
-      fill={activeCity === 'London' ? '#4ADE80' : '#F5F5F7'} 
+      fill={activeCity === 'London' ? '#4ADE80' : '#6b7280'} 
       className="transition-all duration-200"
     />
     {/* NYC dot */}
@@ -346,12 +344,12 @@ const MapGlyph: React.FC<{ activeCity?: string }> = ({ activeCity }) => (
       cx="170" 
       cy="60" 
       r={activeCity === 'New York City' ? "6" : "4"} 
-      fill={activeCity === 'New York City' ? '#4ADE80' : '#F5F5F7'} 
+      fill={activeCity === 'New York City' ? '#4ADE80' : '#6b7280'} 
       className="transition-all duration-200"
     />
     {/* City labels */}
-    <text x="30" y="80" textAnchor="middle" className="text-xs fill-current text-[#F5F5F7]/60">London</text>
-    <text x="170" y="80" textAnchor="middle" className="text-xs fill-current text-[#F5F5F7]/60">NYC</text>
+    <text x="30" y="80" textAnchor="middle" className="text-xs fill-current text-gray-500">London</text>
+    <text x="170" y="80" textAnchor="middle" className="text-xs fill-current text-gray-500">NYC</text>
   </svg>
 );
 
@@ -372,8 +370,8 @@ const SponsorScore: React.FC = () => (
           cx="48"
           cy="48"
           r="40"
-          stroke="#F5F5F7"
-          strokeOpacity="0.1"
+          stroke="#e5e7eb"
+          strokeOpacity="1"
           strokeWidth="6"
           fill="none"
         />
@@ -398,14 +396,13 @@ const SponsorScore: React.FC = () => (
     </div>
     <div>
       <div className="text-sm font-medium">Sponsor Score</div>
-      <div className="text-xs text-[#F5F5F7]/60 mt-1">Network reliability</div>
+      <div className="text-xs text-gray-500 mt-1">Network reliability</div>
     </div>
   </div>
 );
 
 // Main HomePage Component
 const HomePage: React.FC = () => {
-  const [isDark, setIsDark] = useState(true);
   const [selectedCity, setSelectedCity] = useState('London');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -444,10 +441,10 @@ const HomePage: React.FC = () => {
   const fadeInUpTransition = { duration: 0.6 };
 
   return (
-    <Page className={isDark ? 'dark' : ''}>
+    <Page>
       {/* Header */}
       <motion.header 
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-md border-b border-[#F5F5F7]/[0.08]"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -459,16 +456,16 @@ const HomePage: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#how-it-works" className="text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+              <a href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors">
                 How it works
               </a>
-              <a href="#sports" className="text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+              <a href="#sports" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Sports
               </a>
-              <a href="#integrity" className="text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+              <a href="#integrity" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Integrity
               </a>
-              <a href="#faq" className="text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors">
                 FAQ
               </a>
               <CTA variant="solid" className="text-sm px-6 py-2">
@@ -476,20 +473,11 @@ const HomePage: React.FC = () => {
               </CTA>
             </div>
 
-            {/* Theme Toggle & Mobile Menu */}
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setIsDark(!isDark)}
-                className="p-2 rounded-full bg-[#F5F5F7]/[0.05] hover:bg-[#F5F5F7]/[0.1] transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
-                aria-label="Toggle theme"
-              >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-
-              {/* Mobile Menu Button */}
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-full bg-[#F5F5F7]/[0.05] hover:bg-[#F5F5F7]/[0.1] transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -505,20 +493,20 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-[#F5F5F7]/[0.08] bg-[#0A0A0A]"
+              className="md:hidden border-t border-gray-200 bg-white"
             >
               <Container>
                 <div className="py-4 space-y-4">
-                  <a href="#how-it-works" className="block text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+                  <a href="#how-it-works" className="block text-gray-600 hover:text-gray-900 transition-colors">
                     How it works
                   </a>
-                  <a href="#sports" className="block text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+                  <a href="#sports" className="block text-gray-600 hover:text-gray-900 transition-colors">
                     Sports
                   </a>
-                  <a href="#integrity" className="block text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+                  <a href="#integrity" className="block text-gray-600 hover:text-gray-900 transition-colors">
                     Integrity
                   </a>
-                  <a href="#faq" className="block text-[#F5F5F7]/80 hover:text-[#F5F5F7] transition-colors">
+                  <a href="#faq" className="block text-gray-600 hover:text-gray-900 transition-colors">
                     FAQ
                   </a>
                   <CTA variant="solid" className="w-full justify-center">
@@ -588,7 +576,7 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Trust Preview */}
-      <Section className="py-16 border-y border-[#F5F5F7]/[0.05]">
+      <Section className="py-16 border-y border-gray-100">
         <Container>
           <motion.div 
             className="text-center"
@@ -679,7 +667,7 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Sports & Formats */}
-      <Section id="sports" className="bg-[#F5F5F7]/[0.01]">
+      <Section id="sports" className="bg-gray-50">
         <Container>
           <motion.div 
             className="text-center mb-16"
@@ -719,7 +707,7 @@ const HomePage: React.FC = () => {
                     <Check className="w-5 h-5 text-[#4ADE80] mr-3" />
                     <span><strong>Triads</strong> for high conversation density</span>
                   </div>
-                  <div className="flex items-center text-[#F5F5F7]/60">
+                  <div className="flex items-center text-gray-500">
                     <X className="w-5 h-5 mr-3" />
                     <span>No large groups</span>
                   </div>
@@ -805,7 +793,7 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* City-level Discovery */}
-      <Section className="bg-[#F5F5F7]/[0.01]">
+      <Section className="bg-gray-50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
@@ -847,7 +835,7 @@ const HomePage: React.FC = () => {
                     <span>New York City</span>
                     <AccentBadge>Active</AccentBadge>
                   </div>
-                  <div className="flex items-center justify-between text-[#F5F5F7]/60">
+                  <div className="flex items-center justify-between text-gray-500">
                     <span>More cities</span>
                     <span className="text-xs">Coming soon</span>
                   </div>
@@ -884,7 +872,7 @@ const HomePage: React.FC = () => {
                     <input
                       type="text"
                       required
-                      className="w-full px-4 py-3 bg-[#F5F5F7]/[0.05] border border-[#F5F5F7]/[0.1] rounded-lg text-[#F5F5F7] placeholder-[#F5F5F7]/50 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
                       placeholder="Your full name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -898,7 +886,7 @@ const HomePage: React.FC = () => {
                     <input
                       type="email"
                       required
-                      className="w-full px-4 py-3 bg-[#F5F5F7]/[0.05] border border-[#F5F5F7]/[0.1] rounded-lg text-[#F5F5F7] placeholder-[#F5F5F7]/50 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
                       placeholder="your@email.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -927,12 +915,12 @@ const HomePage: React.FC = () => {
                     </label>
                     <select
                       required
-                      className="w-full px-4 py-3 bg-[#F5F5F7]/[0.05] border border-[#F5F5F7]/[0.1] rounded-lg text-[#F5F5F7] focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     >
                       {COPY.cities.map((city) => (
-                        <option key={city} value={city} className="bg-[#0A0A0A]">
+                        <option key={city} value={city} className="bg-white">
                           {city}
                         </option>
                       ))}
@@ -946,7 +934,7 @@ const HomePage: React.FC = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 bg-[#F5F5F7]/[0.05] border border-[#F5F5F7]/[0.1] rounded-lg text-[#F5F5F7] placeholder-[#F5F5F7]/50 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:border-transparent"
                       placeholder="Invite code"
                       value={formData.inviteCode}
                       onChange={(e) => setFormData({ ...formData, inviteCode: e.target.value })}
@@ -954,7 +942,7 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="text-xs text-[#F5F5F7]/60 p-4 bg-[#F5F5F7]/[0.02] rounded-lg">
+                <div className="text-xs text-gray-600 p-4 bg-gray-50 rounded-lg">
                   By submitting, you agree to our verification process. We'll never share your data.
                 </div>
 
@@ -977,7 +965,7 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* FAQ */}
-      <Section id="faq" className="bg-[#F5F5F7]/[0.01]">
+      <Section id="faq" className="bg-gray-50">
         <Container>
           <motion.div 
             className="text-center mb-16"
@@ -1027,14 +1015,14 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Footer */}
-      <footer className="border-t border-[#F5F5F7]/[0.05] bg-[#F5F5F7]/[0.01]">
+      <footer className="border-t border-gray-200 bg-gray-50">
         <Section className="py-16">
           <Container>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
               {/* Brand */}
               <div>
                 <div className="text-2xl font-bold mb-4">{BRAND}</div>
-                <p className="text-[#F5F5F7]/60 mb-6">
+                <p className="text-gray-600 mb-6">
                   {COPY.footer.tagline}
                 </p>
                 <div className="flex space-x-4">
@@ -1068,7 +1056,7 @@ const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-8 border-t border-[#F5F5F7]/[0.05] text-center text-[#F5F5F7]/60">
+            <div className="pt-8 border-t border-gray-200 text-center text-gray-500">
               <p>&copy; 2024 {BRAND}. All rights reserved.</p>
             </div>
           </Container>

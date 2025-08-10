@@ -4,12 +4,12 @@
 
 /* Custom CSS Variables for Cadence Brand */
 :root {
-  --cadence-dark: #0A0A0A;
-  --cadence-light: #F5F5F7;
+  --cadence-dark: #111827;
+  --cadence-light: #ffffff;
   --cadence-accent: #4ADE80;
   --cadence-accent-alt: #7C3AED;
-  --cadence-glass-border: rgba(245, 245, 247, 0.08);
-  --cadence-glass-bg: rgba(245, 245, 247, 0.02);
+  --cadence-glass-border: rgba(156, 163, 175, 0.2);
+  --cadence-glass-bg: rgba(249, 250, 251, 0.8);
 }
 
 /* Base styles for the app */
@@ -27,20 +27,20 @@ html {
 
 body {
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--cadence-dark);
-  color: var(--cadence-light);
+  background-color: var(--cadence-light);
+  color: var(--cadence-dark);
   line-height: 1.6;
 }
 
 /* Selection styles */
 ::selection {
   background-color: var(--cadence-accent);
-  color: var(--cadence-dark);
+  color: white;
 }
 
 ::-moz-selection {
   background-color: var(--cadence-accent);
-  color: var(--cadence-dark);
+  color: white;
 }
 
 /* Focus styles for accessibility */
@@ -91,9 +91,9 @@ input[type="email"],
 input[type="url"],
 select,
 textarea {
-  background-color: rgba(245, 245, 247, 0.05);
-  border: 1px solid rgba(245, 245, 247, 0.1);
-  color: var(--cadence-light);
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: var(--cadence-dark);
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   font-size: 1rem;
@@ -111,21 +111,21 @@ textarea:focus {
 }
 
 input::placeholder {
-  color: rgba(245, 245, 247, 0.5);
+  color: #9ca3af;
 }
 
 /* Custom utility classes */
 @layer utilities {
   .glass {
-    background: rgba(245, 245, 247, 0.02);
-    border: 1px solid rgba(245, 245, 247, 0.08);
+    background: rgba(249, 250, 251, 0.8);
+    border: 1px solid rgba(156, 163, 175, 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
   .glass-strong {
-    background: rgba(245, 245, 247, 0.05);
-    border: 1px solid rgba(245, 245, 247, 0.12);
+    background: rgba(249, 250, 251, 0.9);
+    border: 1px solid rgba(156, 163, 175, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
