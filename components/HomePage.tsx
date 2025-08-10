@@ -150,7 +150,7 @@ const Page: React.FC<{ children: React.ReactNode; className?: string }> = ({ chi
 );
 
 const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => (
-  <section id={id} className={`py-24 px-4 sm:px-6 lg:px-8 ${className}`}>
+  <section id={id} className={`py-32 lg:py-48 px-4 sm:px-6 lg:px-8 ${className}`}>
     {children}
   </section>
 );
@@ -166,11 +166,11 @@ const Headline: React.FC<{ children: React.ReactNode; className?: string; level?
   className = '', 
   level = 1 
 }) => {
-  const baseClasses = 'font-semibold tracking-tight';
+  const baseClasses = 'font-bold tracking-tight text-black';
   const sizes = {
-    1: 'text-4xl sm:text-5xl lg:text-7xl leading-tight',
-    2: 'text-3xl sm:text-4xl lg:text-5xl leading-tight',
-    3: 'text-2xl sm:text-3xl lg:text-4xl leading-tight'
+    1: 'text-5xl sm:text-6xl lg:text-8xl leading-[0.9]',
+    2: 'text-4xl sm:text-5xl lg:text-6xl leading-[0.95]',
+    3: 'text-3xl sm:text-4xl lg:text-5xl leading-tight'
   };
   
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
@@ -182,7 +182,7 @@ const Headline: React.FC<{ children: React.ReactNode; className?: string; level?
 };
 
 const Subcopy: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <p className={`text-lg sm:text-xl text-gray-600 leading-relaxed ${className}`}>
+  <p className={`text-xl sm:text-2xl lg:text-3xl text-gray-500 leading-relaxed font-normal ${className}`}>
     {children}
   </p>
 );
@@ -193,16 +193,22 @@ const CTA: React.FC<{
   className?: string;
   onClick?: (e: React.MouseEvent) => void;
 }> = ({ children, variant = 'solid', className = '', onClick }) => {
-  const baseClasses = 'inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white';
+  const baseClasses = 'inline-flex items-center px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 transform-gpu';
   const variants = {
-    solid: 'bg-[#4ADE80] text-white hover:bg-[#4ADE80]/90 hover:-translate-y-0.5',
-    ghost: 'border border-gray-300 text-gray-700 hover:border-[#4ADE80] hover:-translate-y-0.5'
+    solid: 'bg-black text-white hover:bg-gray-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] active:shadow-sm',
+    ghost: 'text-black hover:bg-gray-50 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]'
   };
   
   return (
-    <button className={`${baseClasses} ${variants[variant]} ${className}`} onClick={onClick}>
+    <motion.button 
+      className={`${baseClasses} ${variants[variant]} ${className}`} 
+      onClick={onClick}
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 };
 
@@ -211,13 +217,17 @@ const Card: React.FC<{
   className?: string;
   hoverable?: boolean;
 }> = ({ children, className = '', hoverable = true }) => (
-  <div className={`
-    bg-gray-50 border border-gray-200 rounded-2xl backdrop-blur-sm p-8
-    ${hoverable ? 'hover:-translate-y-1 hover:border-[#4ADE80]/30 transition-all duration-200 hover:shadow-lg' : ''}
-    ${className}
-  `}>
+  <motion.div 
+    className={`
+      p-12 rounded-3xl bg-white shadow-sm
+      ${hoverable ? 'hover:bg-gray-50/50 transition-all duration-300 cursor-pointer' : ''}
+      ${className}
+    `}
+    whileHover={hoverable ? { y: -2, scale: 1.01, boxShadow: '0 10px 25px -3px rgba(0, 0, 0, 0.1)' } : {}}
+    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+  >
     {children}
-  </div>
+  </motion.div>
 );
 
 const Pill: React.FC<{ 
@@ -228,12 +238,12 @@ const Pill: React.FC<{
 }> = ({ children, active = false, onClick, className = '' }) => (
   <button 
     className={`
-      inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+      inline-flex items-center px-6 py-3 rounded-full font-medium transition-all duration-300
       ${active 
-        ? 'bg-[#4ADE80] text-white' 
-        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        ? 'bg-black text-white scale-[1.05]' 
+        : 'bg-transparent text-gray-600 hover:bg-gray-100 hover:scale-[1.02]'
       }
-      focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white
+      focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2
       ${className}
     `}
     onClick={onClick}
@@ -242,11 +252,7 @@ const Pill: React.FC<{
   </button>
 );
 
-const AccentBadge: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200 ${className}`}>
-    {children}
-  </span>
-);
+// Removed AccentBadge component - replaced with simple text in Apple-style redesign
 
 const Feature: React.FC<{ 
   icon: React.ComponentType<{ className?: string }>; 
@@ -314,43 +320,41 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({ hre
   </a>
 );
 
-// Map SVG Component
-const MapGlyph: React.FC<{ activeCity?: string }> = ({ activeCity }) => (
-  <svg width="200" height="120" viewBox="0 0 200 120" className="opacity-60">
+// Cadence Brand Icon Component
+const CadenceIcon: React.FC<{ className?: string; size?: number }> = ({ 
+  className = '', 
+  size = 32 
+}) => (
+  <motion.svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 32 32" 
+    className={`${className}`}
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+  >
     <defs>
-      <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style={{ stopColor: '#4ADE80', stopOpacity: 0.3 }} />
-        <stop offset="100%" style={{ stopColor: '#4ADE80', stopOpacity: 0.1 }} />
+      <linearGradient id="cadenceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#1f2937' }} />
+        <stop offset="100%" style={{ stopColor: '#374151' }} />
       </linearGradient>
     </defs>
-    {/* Connection path */}
+    {/* Rhythm bars representing cadence/beat */}
+    <rect x="4" y="12" width="3" height="8" rx="1.5" fill="url(#cadenceGradient)" />
+    <rect x="9" y="8" width="3" height="16" rx="1.5" fill="url(#cadenceGradient)" />
+    <rect x="14" y="4" width="3" height="24" rx="1.5" fill="url(#cadenceGradient)" />
+    <rect x="19" y="10" width="3" height="12" rx="1.5" fill="url(#cadenceGradient)" />
+    <rect x="24" y="6" width="3" height="20" rx="1.5" fill="url(#cadenceGradient)" />
+    {/* Connection arc */}
     <path 
-      d="M30 60 Q100 30 170 60" 
-      stroke="url(#pathGradient)" 
-      strokeWidth="1" 
+      d="M6 16 Q16 6 26 16" 
+      stroke="#4ADE80" 
+      strokeWidth="2" 
       fill="none" 
-      strokeDasharray="4,4"
+      strokeLinecap="round" 
+      opacity="0.6"
     />
-    {/* London dot */}
-    <circle 
-      cx="30" 
-      cy="60" 
-      r={activeCity === 'London' ? "6" : "4"} 
-      fill={activeCity === 'London' ? '#4ADE80' : '#6b7280'} 
-      className="transition-all duration-200"
-    />
-    {/* NYC dot */}
-    <circle 
-      cx="170" 
-      cy="60" 
-      r={activeCity === 'New York City' ? "6" : "4"} 
-      fill={activeCity === 'New York City' ? '#4ADE80' : '#6b7280'} 
-      className="transition-all duration-200"
-    />
-    {/* City labels */}
-    <text x="30" y="80" textAnchor="middle" className="text-xs fill-current text-gray-500">London</text>
-    <text x="170" y="80" textAnchor="middle" className="text-xs fill-current text-gray-500">NYC</text>
-  </svg>
+  </motion.svg>
 );
 
 // Sponsor Score Visual
@@ -452,22 +456,45 @@ const HomePage: React.FC = () => {
         <Container>
           <nav className="flex items-center justify-between py-4">
             {/* Logo */}
-            <div className="text-2xl font-bold tracking-tight">{BRAND}</div>
+            <div className="flex items-center gap-3">
+              <CadenceIcon size={32} />
+              <div className="text-2xl font-bold tracking-tight">{BRAND}</div>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <motion.a 
+                href="#how-it-works" 
+                className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-medium"
+                whileHover={{ y: -1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 How it works
-              </a>
-              <a href="#sports" className="text-gray-600 hover:text-gray-900 transition-colors">
+              </motion.a>
+              <motion.a 
+                href="#sports" 
+                className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-medium"
+                whileHover={{ y: -1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 Sports
-              </a>
-              <a href="#integrity" className="text-gray-600 hover:text-gray-900 transition-colors">
+              </motion.a>
+              <motion.a 
+                href="#integrity" 
+                className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-medium"
+                whileHover={{ y: -1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 Integrity
-              </a>
-              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors">
+              </motion.a>
+              <motion.a 
+                href="#faq" 
+                className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-medium"
+                whileHover={{ y: -1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 FAQ
-              </a>
+              </motion.a>
               <CTA variant="solid" className="text-sm px-6 py-2">
                 {COPY.ctas.primary}
               </CTA>
@@ -475,13 +502,16 @@ const HomePage: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <button
+              <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white"
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#4ADE80] focus:ring-offset-2 focus:ring-offset-white"
                 aria-label="Toggle menu"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+              </motion.button>
             </div>
           </nav>
         </Container>
@@ -520,97 +550,118 @@ const HomePage: React.FC = () => {
       </motion.header>
 
       {/* Hero Section */}
-      <Section className="pt-40 pb-24">
+      <Section className="pt-48 pb-32">
         <Container>
           <motion.div 
-            className="text-center"
+            className="text-center max-w-6xl mx-auto"
             initial="initial"
             animate="animate"
             variants={fadeInUp}
             transition={fadeInUpTransition}
           >
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              <AccentBadge>Invite-only</AccentBadge>
-              <AccentBadge>Free to start</AccentBadge>
-            </div>
-            
-            <Headline className="mb-8 max-w-5xl mx-auto">
-              {COPY.hero.headline}
-            </Headline>
-            
-            <Subcopy className="mb-12 max-w-3xl mx-auto">
-              {COPY.hero.subheadline}
-            </Subcopy>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-              <CTA variant="solid" className="w-full sm:w-auto">
-                {COPY.ctas.primary}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </CTA>
-              <CTA variant="ghost" className="w-full sm:w-auto">
-                {COPY.ctas.secondary}
-              </CTA>
-            </div>
-
-            {/* City Selector */}
-            <div className="flex flex-col items-center space-y-6">
-              <div className="flex flex-wrap justify-center gap-3">
-                {COPY.cities.map((city) => (
-                  <Pill
-                    key={city}
-                    active={selectedCity === city}
-                    onClick={() => setSelectedCity(city)}
-                  >
-                    <MapPin className="w-4 h-4 mr-2" />
-                    {city}
-                  </Pill>
-                ))}
+            <div className="space-y-12">
+              {/* Subtle intro text */}
+              <div className="text-center mb-8">
+                <p className="text-lg text-gray-600">Invite-only • Free to start</p>
               </div>
               
-              {/* Map Visual */}
-              <MapGlyph activeCity={selectedCity} />
+              {/* Hero headline - bigger and bolder */}
+              <Headline className="mb-16">
+                {COPY.hero.headline}
+              </Headline>
+              
+              {/* Subheadline with more breathing room */}
+              <Subcopy className="mb-20 max-w-4xl mx-auto">
+                {COPY.hero.subheadline}
+              </Subcopy>
+
+              {/* CTAs with more space */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
+                <CTA variant="solid">
+                  {COPY.ctas.primary}
+                </CTA>
+                <CTA variant="ghost">
+                  {COPY.ctas.secondary}
+                </CTA>
+              </div>
+
+              {/* City selector - cleaner presentation */}
+              <div className="space-y-12">
+                <div className="flex justify-center gap-6">
+                  {COPY.cities.map((city) => (
+                    <Pill
+                      key={city}
+                      active={selectedCity === city}
+                      onClick={() => setSelectedCity(city)}
+                    >
+                      {city}
+                    </Pill>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </Container>
       </Section>
 
-      {/* Trust Preview */}
-      <Section className="py-16 border-y border-gray-100">
+      {/* Hero Training Image */}
+      <Section className="py-16">
         <Container>
           <motion.div 
-            className="text-center"
+            className="relative rounded-3xl overflow-hidden bg-gray-100 aspect-[3/2] max-w-6xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Hero training image */}
+            <div className="absolute inset-0">
+              <img 
+                src="/london.png" 
+                alt="Elite founders training together in London"
+                className="w-full h-full object-contain"
+              />
+              {/* Elegant overlay with content */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                <div className="w-full p-8 text-white">
+                  <h3 className="text-2xl font-bold mb-2 tracking-tight">Elite founders training together</h3>
+                  <p className="text-white/90 text-lg">London • Boxing session with tech executives</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </Section>
+
+      {/* Trust Preview - Apple-style clean */}
+      <Section className="py-24">
+        <Container>
+          <motion.div 
+            className="text-center max-w-4xl mx-auto"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Subcopy className="mb-8">Built for founders, operators, and investors who train.</Subcopy>
-            <div className="flex flex-wrap justify-center gap-4">
-              <AccentBadge>Founders</AccentBadge>
-              <AccentBadge>C-level</AccentBadge>
-              <AccentBadge>Senior Operators</AccentBadge>
-              <AccentBadge>Investors</AccentBadge>
-            </div>
+            <Subcopy className="text-xl">Built for founders, operators, and investors who train.</Subcopy>
           </motion.div>
         </Container>
       </Section>
 
       {/* How It Works */}
-      <Section id="how-it-works">
+      <Section id="how-it-works" className="py-32">
         <Container>
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-6">How it works</Headline>
-            <Subcopy className="max-w-2xl mx-auto">
-              Four simple steps to connect with elite peers and build lasting relationships.
+            <Headline level={2} className="mb-8">How it works</Headline>
+            <Subcopy className="max-w-3xl mx-auto text-lg">
+              Connect with your peers in four simple steps.
             </Subcopy>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {COPY.howItWorks.map((step, index) => (
               <motion.div
                 key={index}
@@ -618,13 +669,13 @@ const HomePage: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card>
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#4ADE80] text-[#0A0A0A] font-bold text-lg mb-6">
+                <Card className="p-8">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-black text-white font-bold text-xl mb-6">
                     {index + 1}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <div className="text-sm text-[#4ADE80] mb-4">{step.subtitle}</div>
-                  <p className="text-[#F5F5F7]/70">{step.description}</p>
+                  <h3 className="text-xl font-bold mb-3 tracking-tight">{step.title}</h3>
+                  <div className="text-sm text-[#4ADE80] font-medium mb-4">{step.subtitle}</div>
+                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -633,21 +684,21 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Value Pillars */}
-      <Section>
+      <Section className="py-32">
         <Container>
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-6">Built different</Headline>
-            <Subcopy className="max-w-2xl mx-auto">
-              Every detail designed to foster genuine connections and eliminate noise.
+            <Headline level={2} className="mb-8">Built different</Headline>
+            <Subcopy className="max-w-3xl mx-auto text-lg">
+              Every detail designed to foster genuine connections.
             </Subcopy>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {COPY.valuePillars.map((pillar, index) => (
               <motion.div
                 key={index}
@@ -667,26 +718,26 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Sports & Formats */}
-      <Section id="sports" className="bg-gray-50">
+      <Section id="sports" className="py-32 bg-gray-50">
         <Container>
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-6">Sports & formats</Headline>
-            <Subcopy className="max-w-2xl mx-auto">
-              Start with what you love. Build from there.
+            <Headline level={2} className="mb-8">Start with what you love</Headline>
+            <Subcopy className="max-w-3xl mx-auto text-lg">
+              Train in the sports you're passionate about, in formats that work.
             </Subcopy>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
               {/* Sports */}
               <div>
-                <h3 className="text-xl font-semibold mb-6">Sports (V1)</h3>
-                <div className="flex flex-wrap gap-3">
+                <h3 className="text-2xl font-bold mb-8 tracking-tight">Sports (V1)</h3>
+                <div className="flex flex-wrap gap-4">
                   {COPY.sports.map((sport) => (
                     <Pill key={sport} active={true}>
                       {sport}
@@ -697,94 +748,130 @@ const HomePage: React.FC = () => {
 
               {/* Formats */}
               <div>
-                <h3 className="text-xl font-semibold mb-6">Formats</h3>
-                <div className="space-y-4">
+                <h3 className="text-2xl font-bold mb-8 tracking-tight">Formats</h3>
+                <div className="space-y-5">
                   <div className="flex items-center">
-                    <Check className="w-5 h-5 text-[#4ADE80] mr-3" />
-                    <span><strong>1:1</strong> by default</span>
+                    <Check className="w-5 h-5 text-[#4ADE80] mr-4" />
+                    <span className="text-lg"><strong>1:1</strong> by default</span>
                   </div>
                   <div className="flex items-center">
-                    <Check className="w-5 h-5 text-[#4ADE80] mr-3" />
-                    <span><strong>Triads</strong> for high conversation density</span>
+                    <Check className="w-5 h-5 text-[#4ADE80] mr-4" />
+                    <span className="text-lg"><strong>Triads</strong> for high conversation density</span>
                   </div>
                   <div className="flex items-center text-gray-500">
-                    <X className="w-5 h-5 mr-3" />
-                    <span>No large groups</span>
+                    <X className="w-5 h-5 mr-4" />
+                    <span className="text-lg">No large groups</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="text-center">
-              <AccentBadge>More sports coming as we scale</AccentBadge>
+            <div className="text-center pt-8">
+              <p className="text-gray-500 text-sm">More sports coming as we scale</p>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* Integrity & Vetting */}
-      <Section id="integrity">
+      {/* Network in Action Image */}
+      <Section className="py-16">
         <Container>
           <motion.div 
-            className="text-center mb-16"
+            className="relative rounded-3xl overflow-hidden bg-gray-200 aspect-[3/2] max-w-5xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Network training image */}
+            <div className="absolute inset-0">
+              <img 
+                src="/nyc.png" 
+                alt="Weekly tennis sessions with NYC founders"
+                className="w-full h-full object-contain"
+              />
+              {/* Elegant overlay with content and metrics */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">
+                <div className="w-full p-8">
+                  <div className="flex items-end justify-between text-white">
+                    <div>
+                      <h3 className="text-xl font-bold mb-2 tracking-tight">Weekly tennis sessions</h3>
+                      <p className="text-white/90">NYC founders staying connected through sport</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-white/70 mb-1">Reliability Score</p>
+                      <p className="text-2xl font-bold text-green-400">94%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </Section>
+
+      {/* Integrity & Vetting */}
+      <Section id="integrity" className="py-32">
+        <Container>
+          <motion.div 
+            className="text-center mb-20"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-6">Integrity by design</Headline>
-            <Subcopy className="max-w-2xl mx-auto">
-              Quality through accountability. Every member matters.
+            <Headline level={2} className="mb-8">Quality through accountability</Headline>
+            <Subcopy className="max-w-3xl mx-auto text-lg">
+              Every member's reliability shapes the entire network.
             </Subcopy>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             {/* Policy Points */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="flex items-start">
-                <Shield className="w-6 h-6 text-[#4ADE80] mr-4 mt-1 flex-shrink-0" />
+                <Shield className="w-7 h-7 text-[#4ADE80] mr-5 mt-1 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-2">Reliability scoring</h3>
-                  <p className="text-[#F5F5F7]/70">System-only score influences future matches</p>
+                  <h3 className="font-bold text-lg mb-3 tracking-tight">Reliability scoring</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">System-only score influences future matches</p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <Users className="w-6 h-6 text-[#4ADE80] mr-4 mt-1 flex-shrink-0" />
+                <Users className="w-7 h-7 text-[#4ADE80] mr-5 mt-1 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-2">Sponsor accountability</h3>
-                  <p className="text-[#F5F5F7]/70">No-shows affect your inviter's reputation</p>
+                  <h3 className="font-bold text-lg mb-3 tracking-tight">Sponsor accountability</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">No-shows affect your inviter's reputation</p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <Check className="w-6 h-6 text-[#4ADE80] mr-4 mt-1 flex-shrink-0" />
+                <Check className="w-7 h-7 text-[#4ADE80] mr-5 mt-1 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-2">Full verification</h3>
-                  <p className="text-[#F5F5F7]/70">Invite + vouch + LinkedIn + real name</p>
+                  <h3 className="font-bold text-lg mb-3 tracking-tight">Full verification</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">Invite + vouch + LinkedIn + real name</p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <Eye className="w-6 h-6 text-[#4ADE80] mr-4 mt-1 flex-shrink-0" />
+                <Eye className="w-7 h-7 text-[#4ADE80] mr-5 mt-1 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-2">Safety first</h3>
-                  <p className="text-[#F5F5F7]/70">Double opt-in confirmations, gentle cooldowns</p>
+                  <h3 className="font-bold text-lg mb-3 tracking-tight">Safety first</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">Double opt-in confirmations, gentle cooldowns</p>
                 </div>
               </div>
             </div>
 
             {/* Sponsor Score Visual */}
             <div className="flex justify-center">
-              <Card className="max-w-sm">
-                <div className="text-center mb-6">
-                  <h3 className="text-lg font-semibold mb-2">Network Health</h3>
-                  <p className="text-sm text-[#F5F5F7]/70">Current reliability across all members</p>
+              <Card className="max-w-sm p-10">
+                <div className="text-center mb-8">
+                  <h3 className="text-xl font-bold mb-3 tracking-tight">Network Health</h3>
+                  <p className="text-gray-600">Current reliability across all members</p>
                 </div>
                 <div className="flex justify-center">
                   <SponsorScore />
                 </div>
-                <div className="mt-6 text-center">
-                  <AccentBadge>Target: ≥85%</AccentBadge>
+                <div className="mt-8 text-center">
+                  <p className="text-sm text-gray-600 font-medium">Target: ≥85%</p>
                 </div>
               </Card>
             </div>
@@ -793,20 +880,20 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* City-level Discovery */}
-      <Section className="bg-gray-50">
+      <Section className="py-32 bg-gray-50">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div 
               initial={fadeInUp.initial}
               animate={fadeInUp.animate}
               transition={fadeInUpTransition}
             >
-              <Headline level={2} className="mb-6">City-level discovery</Headline>
-              <Subcopy className="mb-8">
-                See vetted members in your area. No precise location until you both accept a session.
+              <Headline level={2} className="mb-8">Find your people</Headline>
+              <Subcopy className="mb-10 text-lg leading-relaxed">
+                See vetted members in your city. Privacy-first until you're both ready to train.
               </Subcopy>
               
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-4 mb-10">
                 {COPY.cities.map((city) => (
                   <Pill key={city} active={city === selectedCity}>
                     <Globe className="w-4 h-4 mr-2" />
@@ -815,25 +902,27 @@ const HomePage: React.FC = () => {
                 ))}
               </div>
               
-              <AccentBadge>Privacy-first by default</AccentBadge>
+              <div className="mt-8">
+                <p className="text-sm text-gray-600 font-medium">Privacy-first by default</p>
+              </div>
             </motion.div>
 
             <div className="flex justify-center">
-              <Card className="max-w-md">
-                <div className="text-center mb-6">
-                  <MapPin className="w-8 h-8 text-[#4ADE80] mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Launch Cities</h3>
-                  <p className="text-sm text-[#F5F5F7]/70">Available now</p>
+              <Card className="max-w-md p-8">
+                <div className="text-center mb-8">
+                  <MapPin className="w-10 h-10 text-[#4ADE80] mx-auto mb-6" />
+                  <h3 className="text-xl font-bold mb-3 tracking-tight">Launch Cities</h3>
+                  <p className="text-gray-600">Available now</p>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div className="flex items-center justify-between">
                     <span>London</span>
-                    <AccentBadge>Active</AccentBadge>
+                    <span className="text-sm text-green-600 font-medium">Active</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>New York City</span>
-                    <AccentBadge>Active</AccentBadge>
+                    <span className="text-sm text-green-600 font-medium">Active</span>
                   </div>
                   <div className="flex items-center justify-between text-gray-500">
                     <span>More cities</span>
@@ -847,22 +936,22 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Invite Form */}
-      <Section>
+      <Section className="py-32">
         <Container>
           <motion.div 
-            className="max-w-2xl mx-auto"
+            className="max-w-3xl mx-auto"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <div className="text-center mb-12">
-              <Headline level={2} className="mb-6">Request an invite</Headline>
-              <Subcopy>
+            <div className="text-center mb-16">
+              <Headline level={2} className="mb-8">Request an invite</Headline>
+              <Subcopy className="text-lg">
                 Join elite peers in your city. Invite-only, free to start.
               </Subcopy>
             </div>
 
-            <Card>
+            <Card className="p-12">
               <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -965,21 +1054,21 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* FAQ */}
-      <Section id="faq" className="bg-gray-50">
+      <Section id="faq" className="py-32 bg-gray-50">
         <Container>
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-6">Questions</Headline>
-            <Subcopy className="max-w-2xl mx-auto">
+            <Headline level={2} className="mb-8">Questions</Headline>
+            <Subcopy className="max-w-3xl mx-auto text-lg">
               Everything you need to know about joining and using Cadence.
             </Subcopy>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {COPY.faqs.map((faq, index) => (
               <FAQItem
                 key={index}
@@ -992,21 +1081,21 @@ const HomePage: React.FC = () => {
       </Section>
 
       {/* Final CTA */}
-      <Section>
+      <Section className="py-32">
         <Container>
           <motion.div 
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUpTransition}
           >
-            <Headline level={2} className="mb-8">
+            <Headline level={2} className="mb-10">
               Ready to train with elite peers?
             </Headline>
-            <Subcopy className="mb-12">
+            <Subcopy className="mb-16 text-lg">
               Join the private network for founders and operators who take their sport seriously.
             </Subcopy>
-            <CTA variant="solid" className="text-lg px-12 py-4">
+            <CTA variant="solid" className="text-lg px-16 py-5">
               {COPY.ctas.primary}
               <ArrowRight className="ml-3 w-5 h-5" />
             </CTA>
@@ -1016,13 +1105,16 @@ const HomePage: React.FC = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-gray-50">
-        <Section className="py-16">
+        <Section className="py-20">
           <Container>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
               {/* Brand */}
               <div>
-                <div className="text-2xl font-bold mb-4">{BRAND}</div>
-                <p className="text-gray-600 mb-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <CadenceIcon size={36} />
+                  <div className="text-3xl font-bold tracking-tight">{BRAND}</div>
+                </div>
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                   {COPY.footer.tagline}
                 </p>
                 <div className="flex space-x-4">
@@ -1036,8 +1128,8 @@ const HomePage: React.FC = () => {
 
               {/* Links */}
               <div>
-                <h3 className="font-semibold mb-4">Product</h3>
-                <div className="space-y-3">
+                <h3 className="font-bold text-lg mb-6 tracking-tight">Product</h3>
+                <div className="space-y-4">
                   <div><FooterLink href="#how-it-works">How it works</FooterLink></div>
                   <div><FooterLink href="#sports">Sports</FooterLink></div>
                   <div><FooterLink href="#integrity">Integrity</FooterLink></div>
@@ -1047,8 +1139,8 @@ const HomePage: React.FC = () => {
 
               {/* Legal */}
               <div>
-                <h3 className="font-semibold mb-4">Legal</h3>
-                <div className="space-y-3">
+                <h3 className="font-bold text-lg mb-6 tracking-tight">Legal</h3>
+                <div className="space-y-4">
                   <div><FooterLink href="/privacy">Privacy</FooterLink></div>
                   <div><FooterLink href="/terms">Terms</FooterLink></div>
                   <div><FooterLink href="/contact">Contact</FooterLink></div>
@@ -1056,8 +1148,8 @@ const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-8 border-t border-gray-200 text-center text-gray-500">
-              <p>&copy; 2024 {BRAND}. All rights reserved.</p>
+            <div className="pt-12 border-t border-gray-200 text-center text-gray-500">
+              <p className="text-lg">&copy; 2024 {BRAND}. All rights reserved.</p>
             </div>
           </Container>
         </Section>
