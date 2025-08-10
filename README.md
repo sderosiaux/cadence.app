@@ -207,6 +207,21 @@ npm run build
 
 ## 🚢 Deployment
 
+### GitHub Pages (Automatic) ⭐
+This repository includes a GitHub Actions workflow that automatically deploys to GitHub Pages on every push to `main`.
+
+**Setup:**
+1. Go to your repository **Settings > Pages**
+2. Set **Source** to "GitHub Actions"  
+3. Push to `main` branch - deployment happens automatically!
+4. Your site will be available at: `https://yourusername.github.io/repository-name`
+
+The workflow automatically:
+- Builds the Next.js app for static export
+- Runs all quality checks (TypeScript, ESLint)
+- Deploys to GitHub Pages
+- Zero configuration needed!
+
 ### Next.js App Router
 ```typescript
 // app/page.tsx
@@ -222,8 +237,17 @@ export default function Page() {
 }
 ```
 
-### Static Export
-Compatible with Next.js static export for CDN deployment.
+### Vercel
+```bash
+npm install -g vercel
+vercel
+```
+
+### Other Platforms
+```bash
+npm run build
+# Upload the ./out folder to your hosting provider
+```
 
 ## 🔧 Troubleshooting
 
